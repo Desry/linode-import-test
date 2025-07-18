@@ -1,0 +1,163 @@
+{
+  "description": "Update ticket database",
+  "endpoint": "TeradataDhl42.Acoc.ep",
+  "endpointType": "TERADATA",
+  "folder": "IncMgmt",
+  "highRiskStatisticMethod": "PERCENT",
+  "highRiskStatisticPeriod": "MONTH",
+  "node": "AnowEngine.Tda.apf",
+  "owner": "lpopov",
+  "priority": "0",
+  "processingType": "TASK",
+  "serverNodeType": "TERADATA",
+  "statisticMethod": "AVERAGE",
+  "statisticPeriod": "MONTH",
+  "tags": 
+  [
+    "IncMgmt",
+    "Global"
+  ],
+  "taskType": "RDBMS_SQL",
+  "customFieldValues": {
+  },
+  "processingCommand": {
+    "script": "UPDATE ${KVS::Configuration.IncMgmt.Gbl.dskv(ticket_table)} SET \n   state_id='${state_internal}',to_process='${process_internal}',close_code='${close_code_internal}'\n WHERE inc_number='${number_internal}';"
+  },
+  "actions": 
+  [
+    {
+      "processingActionType": "ADD_TAG",
+      "processingEventCategory": "PROCESSING",
+      "processingEventType": "PROCESSING_COMPLETED",
+      "condition": {
+        "criteria": 
+        [
+          {
+            "fieldName": "number_internal",
+            "operator": "IS_NOT_NULL",
+            "value": null
+          }
+        ],
+        "operator": "AND"
+      },
+      "processingCommand": {
+        "actionTargetType": "SELF",
+        "keepForcedStatus": true,
+        "operator": "",
+        "restartType": "RESTART_FROM_BEGINNING",
+        "value": "${number_internal}"
+      }
+    },
+    {
+      "processingActionType": "ADD_TAG",
+      "processingEventCategory": "PROCESSING",
+      "processingEventType": "PROCESSING_COMPLETED",
+      "condition": {
+        "criteria": 
+        [
+          {
+            "fieldName": "number_internal",
+            "operator": "IS_NOT_NULL",
+            "value": null
+          }
+        ],
+        "operator": "AND"
+      },
+      "processingCommand": {
+        "actionTargetType": "RELATED",
+        "keepForcedStatus": true,
+        "operator": "",
+        "relation": {
+          "relationType": "ROOT"
+        },
+        "restartType": "RESTART_FROM_BEGINNING",
+        "value": "${number_internal}"
+      }
+    },
+    {
+      "processingActionType": "ADD_TAG",
+      "processingEventCategory": "PROCESSING",
+      "processingEventType": "PROCESSING_COMPLETED",
+      "condition": {
+        "criteria": 
+        [
+          {
+            "fieldName": "number_internal",
+            "operator": "IS_NOT_NULL",
+            "value": null
+          }
+        ],
+        "operator": "AND"
+      },
+      "processingCommand": {
+        "actionTargetType": "RELATED",
+        "keepForcedStatus": true,
+        "operator": "",
+        "relation": {
+          "relationType": "PARENT"
+        },
+        "restartType": "RESTART_FROM_BEGINNING",
+        "value": "${number_internal}"
+      }
+    }
+  ],
+  "dependencies": 
+  [
+    {
+      "dependencyType": "RESOURCE",
+      "name": "Default.IncMgmt.stock",
+      "processingStatus": "COMPLETED",
+      "processingType": "TASK",
+      "resource": "Default.IncMgmt.stock",
+      "resourcePermits": "1",
+      "resourceType": "STOCK",
+      "serverNodeType": "TERADATA",
+      "taskType": "RDBMS_SQL"
+    },
+    {
+      "dependencyType": "RESOURCE",
+      "name": "Teradata.Gbl.sem",
+      "processingStatus": "COMPLETED",
+      "processingType": "TASK",
+      "resource": "Teradata.Gbl.sem",
+      "resourceType": "BINARY_SEMAPHORE",
+      "semaphoreState": "ON",
+      "serverNodeType": "TERADATA",
+      "taskType": "RDBMS_SQL"
+    }
+  ],
+  "designParameters": 
+  [
+    {
+      "allowExpressions": true,
+      "editorType": "TEXT",
+      "name": "state_internal",
+      "required": true,
+      "title": "State ID"
+    },
+    {
+      "allowExpressions": true,
+      "checkedValue": "1",
+      "defaultValue": "0",
+      "editorType": "CHECKBOX",
+      "name": "process_internal",
+      "required": true,
+      "title": "To be processed",
+      "uncheckedValue": "0"
+    },
+    {
+      "allowExpressions": true,
+      "editorType": "TEXT",
+      "name": "number_internal",
+      "required": true,
+      "title": "Incident number"
+    },
+    {
+      "allowExpressions": true,
+      "editorType": "TEXT",
+      "name": "close_code_internal",
+      "required": true,
+      "title": "Close code "
+    }
+  ]
+}

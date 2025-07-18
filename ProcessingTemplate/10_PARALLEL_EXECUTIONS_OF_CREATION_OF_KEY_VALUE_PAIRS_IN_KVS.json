@@ -1,0 +1,40 @@
+{
+  "owner": "api_user",
+  "priority": "0",
+  "processingType": "WORKFLOW",
+  "statisticMethod": "AVERAGE",
+  "statisticPeriod": "MONTH",
+  "workflowType": "FOR_EACH",
+  "customFieldValues": {
+  },
+  "processingCommand": {
+    "forEachCollection": "1,2,3,4,5,6,7,8,9,10",
+    "forEachCollectionType": "TEXT",
+    "forEachIteratorName": "i",
+    "forEachSeparator": ",",
+    "method": "GET",
+    "onUnresolvedVariables": "FAIL",
+    "resultVariableLevel": "SELF"
+  },
+  "items": 
+  [
+    {
+      "name": "CREATE_KEY_VALUE_PAIR_IN_DES_TEST_KVS",
+      "processingTemplate": "CREATE_KEY_VALUE_PAIR_IN_DES_TEST_KVS",
+      "processingType": "TASK",
+      "serverNodeType": "REST_WEB_SERVICE",
+      "statisticMethod": "AVERAGE",
+      "statisticPeriod": "MONTH",
+      "taskType": "REST_WEB_SERVICE_CALL"
+    },
+    {
+      "name": "CREATE_KEY_VALUE_PAIR_IN_DES_TEST_KVS_COPY",
+      "processingTemplate": "CREATE_KEY_VALUE_PAIR_IN_DES_TEST_KVS_COPY",
+      "processingType": "TASK",
+      "serverNodeType": "REST_WEB_SERVICE",
+      "statisticMethod": "AVERAGE",
+      "statisticPeriod": "MONTH",
+      "taskType": "REST_WEB_SERVICE_CALL"
+    }
+  ]
+}

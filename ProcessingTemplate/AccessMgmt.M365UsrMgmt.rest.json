@@ -1,0 +1,100 @@
+{
+  "description": "dhl-o365-onboarding-request",
+  "endpoint": "Api.M365UsrMgmt.ep",
+  "endpointType": "REST_WEB_SERVICE",
+  "folder": "M365UsrMgmt",
+  "node": "AnowEngine.Rest.rr",
+  "owner": "jpupik",
+  "priority": "0",
+  "processingType": "TASK",
+  "serverNodeType": "REST_WEB_SERVICE",
+  "statisticMethod": "MOST_FREQUENT_VALUE",
+  "statisticPeriod": "MONTH",
+  "tags": 
+  [
+    "M365UsrMgmt"
+  ],
+  "taskType": "REST_WEB_SERVICE_CALL",
+  "customFieldValues": {
+  },
+  "processingCommand": {
+    "body": "{\n  \"id\": \"TEST_60f83c69-1674-431e\",\n  \"requestType\": \"DHL.O365.Device.M365Apps\",\n  \"requestedBy\": \"jiri.formacek@dhl.com\",\n  \"dataVersion\": \"1.0\",\n  \"subject\": \"Add\",\n  \"u_device_name\": \"CZCHOWVD0017328\",\n  \"u_group_name\": \"CLASG-Intune-CorpHybridDevices\"\n}",
+    "headers": "Authorization=${access_token}",
+    "method": "POST",
+    "resultVariableLevel": "ROOT",
+    "url": "/api/request"
+  },
+  "dependencies": 
+  [
+    {
+      "dependencyType": "RESOURCE",
+      "name": "ServiceNow.Gbl.sem",
+      "processingStatus": "COMPLETED",
+      "processingType": "TASK",
+      "resource": "ServiceNow.Gbl.sem",
+      "resourceType": "BINARY_SEMAPHORE",
+      "semaphoreState": "ON",
+      "serverNodeType": "REST_WEB_SERVICE",
+      "taskType": "REST_WEB_SERVICE_CALL"
+    }
+  ],
+  "designParameters": 
+  [
+    {
+      "allowExpressions": true,
+      "defaultValue": "DHL.O365.Device.M365Apps",
+      "editorType": "TEXT",
+      "name": "requestType",
+      "required": true,
+      "title": "requestType"
+    },
+    {
+      "allowExpressions": true,
+      "defaultValue": "CZCHOWVD0017328",
+      "editorType": "TEXT",
+      "name": "u_device_name",
+      "required": true,
+      "title": "u_device_name"
+    },
+    {
+      "allowExpressions": true,
+      "defaultValue": "CLASG-Intune-CorpHybridDevices",
+      "editorType": "TEXT",
+      "name": "u_group_name",
+      "required": true,
+      "title": "u_group_name "
+    },
+    {
+      "allowExpressions": true,
+      "defaultValue": "jiri.formacek@dhl.com",
+      "editorType": "TEXT",
+      "name": "requestedBy",
+      "required": true,
+      "title": "requestedBy"
+    },
+    {
+      "allowExpressions": true,
+      "defaultValue": "1.0",
+      "editorType": "TEXT",
+      "name": "dataVersion",
+      "required": true,
+      "title": "dataVersion"
+    },
+    {
+      "allowExpressions": true,
+      "defaultValue": "TEST_60f83c69-1674-431d-9e1e-16b5100a16b789",
+      "editorType": "TEXT",
+      "name": "request_id",
+      "required": true,
+      "title": "request_id"
+    },
+    {
+      "allowExpressions": true,
+      "defaultValue": "Add",
+      "editorType": "TEXT",
+      "name": "subject",
+      "required": true,
+      "title": "subject"
+    }
+  ]
+}
